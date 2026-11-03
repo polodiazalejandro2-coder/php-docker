@@ -1,21 +1,21 @@
-# Entorno y diagnóstico
+# Documentación de ejecución
 
-Un error de conexión indica que el servicio web está caído o no acepta conexiones; el navegador no recibe una respuesta HTTP. Un código HTTP 404 significa que el servidor si respondio, pero no encontró el archivo solicitado. Un error de sintaxis PHP indica que el archivo existe, pero contiene código mal formado que PHP no puede interpretar
+El procedimiento completo está en el [README del proyecto](../README.md). Este archivo
+resume la diferencia entre las dos etapas y cómo diagnosticar problemas sin confundir
+un fallo de conexión con un 404 o un error de sintaxis.
 
-# Comandos utilizados para realizar este primer bloque de docker con php
+## Comprobaciones Docker
 
-    docker compose config -q
-    docker compose up -d
-    docker compose ps
-    curl.exe -i http://127.0.0.1:8090/01-bienvenida.php
+Desde la raíz valida y arranca la etapa inicial, disponible en `localhost:8090`. Desde
+`docker/`, copia `.env.example` a `.env`, ejecuta `docker compose config --quiet` y
+arranca la etapa completa en `localhost:8091`.
 
-# Simular un fallo de conexión, reiniciar y consultar registros:
+- Error de conexión: el servicio o el motor Docker no está disponible.
+- HTTP 404: Apache contestó, pero no encontró la ruta.
+- Error PHP: consulta la salida del servicio y valida el archivo con
+  `docker compose exec web php -l /var/www/html/nombre.php`.
+- Sintaxis Apache: `docker compose exec web apache2ctl -t`.
+- Controladores PDO: `docker compose exec web php -m`.
 
-    docker compose stop web
-    docker compose start web
-    docker compose logs --tail=20 web
-
-# Validar la sintaxis de PHP dentro del contenedor:
-
-    docker compose exec web php -l /var/www/html/01-bienvenida.php
-
+No publiques los puertos de las bases de datos ni ejecutes `docker compose down -v`
+cuando quieras preservar sus volúmenes.

@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="jukebox-architecture" name="Arquitectura Jukebox JSON">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="browser" value="Navegador&#xa;localhost" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="350" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="stage1" value="Etapa inicial · 8090&#xa;Docker Compose&#xa;Apache + PHP 8.5&#xa;/var/www/html ← ./src" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="300" y="140" width="240" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="stage2" value="Etapa completa · 8091&#xa;Apache + PHP 8.5&#xa;PDO PostgreSQL / MariaDB&#xa;/var/www/html ← ./src" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="300" y="470" width="260" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="json" value="JSON privado&#xa;./data ↔ /var/www/data&#xa;canciones.json&#xa;usuarios.json" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="700" y="470" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="postgres" value="PostgreSQL 17&#xa;volumen persistente&#xa;solo prueba PDO" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="970" y="430" width="190" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="mariadb" value="MariaDB 11.4&#xa;volumen persistente&#xa;solo prueba PDO" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="970" y="570" width="190" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-browser-stage1" value="HTTP :8090" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="browser" target="stage1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-browser-stage2" value="HTTP :8091" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="browser" target="stage2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-stage2-json" value="Bind mount privado" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;startArrow=block;" edge="1" parent="1" source="stage2" target="json">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-stage2-postgres" value="PDO / red interna" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="stage2" target="postgres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-stage2-mariadb" value="PDO / red interna" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="stage2" target="mariadb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
