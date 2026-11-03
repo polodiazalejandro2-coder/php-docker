@@ -1,9 +1,9 @@
+name: asociacion-jukebox-inicial
+
 services:
-  php:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  web:
+    image: php:8.5-apache-bookworm
     ports:
-      - "8081:80"
+      - "127.0.0.1:8090:80"
     volumes:
-      - .:/var/www/html
+      - ./src:/var/www/html

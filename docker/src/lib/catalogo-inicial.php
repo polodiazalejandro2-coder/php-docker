@@ -1,0 +1,28 @@
+<?php
+
+return [
+    [
+        'id' => 1,
+        'title' => 'Sesión de prueba',
+        'artist' => 'Grupo del aula',
+        'category' => 'electronica',
+        'duration' => 185,
+        'src' => 'audio/demo-01.mp3',
+    ],
+    [
+        'id' => 2,
+        'title' => 'Ritmo nocturno',
+        'artist' => 'Artista de ejemplo',
+        'category' => 'rock',
+        'duration' => 240,
+        'src' => 'audio/demo-02.mp3',
+    ],
+    [
+        'id' => 3,
+        'title' => 'Tema de película',
+        'artist' => 'Compositor de prueba',
+        'category' => 'bandas-sonoras',
+        'duration' => 215,
+        'src' => 'audio/demo-01.mp3',
+    ],
+];
